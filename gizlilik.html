@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index,follow" />
+    <title>Gizlilik Politikası — Ciro</title>
+    <style>
+      :root { color: #202735; background: #f6f7f9; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      body { margin: 0; line-height: 1.65; }
+      main { width: min(760px, calc(100% - 32px)); margin: 32px auto; padding: 32px; background: #fff; border: 1px solid #e4e7ec; border-radius: 18px; }
+      h1, h2 { line-height: 1.25; }
+      h1 { margin-top: 0; }
+      h2 { margin-top: 2rem; }
+      .ozet { padding: 16px 18px; border-left: 4px solid #ffc93c; background: #fff9e7; border-radius: 8px; }
+      a { color: #176b5b; }
+      small { color: #667085; }
+      @media (max-width: 560px) { main { margin: 0; width: 100%; padding: 24px 18px; border: 0; border-radius: 0; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Ciro (Kolay Para Yönetimi) Gizlilik Politikası</h1>
+      <small>Son güncelleme: 22 Ağustos 2026</small>
+
+      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
+
+      <h2>Toplanan veriler ve kullanım amaçları</h2>
+      <p><strong>Hesapsız kullanımda</strong> uygulamadaki finans kayıtları, ayarlar ve fiş fotoğrafları yalnızca cihazınızda saklanır. Fiş metni tanıma işlemi cihaz üzerinde yapılır.</p>
+      <p><strong>İsteğe bağlı hesap bağlandığında</strong> aşağıdaki veriler işlenebilir:</p>
+      <ul>
+        <li>E-posta adresi: hesap oluşturma ve giriş doğrulama.</li>
+        <li>Cihazda AES-256-GCM ile şifrelenmiş defter yedeği: yedekleme ve yeni cihaza geri yükleme.</li>
+        <li>Defter paylaşımı kullanılırsa şifreli kayıt zarfları: personel kayıtlarının işletme sahibine iletilmesi.</li>
+        <li>Yedek indirme kötüye kullanımını sınırlamak için günlük hesap indirme sayacı ve bayt toplamı.</li>
+        <li>Yedek indirme IP kotası: ham IP uygulama veritabanına yazılmadan, yalnız sunucuda bulunan gizli bir değerle tek yönlü SHA-256 özeti oluşturulur; özet, günlük indirme sayacı ve bayt toplamıyla işlenir.</li>
+        <li>Altyapı sağlayıcısının güvenlik ve erişim kayıtları: IP adresi ve zaman damgası gibi standart bağlantı bilgileri.</li>
+      </ul>
+      <p>Bulut yedeği sunucuda şifreli saklanır. Şifreleme anahtarı hesabınıza bağlı altyapıda tutulduğu için bu özellik “sunucu dâhil hiç kimse erişemez” anlamında uçtan uca şifreleme iddiası taşımaz.</p>
+
+      <h2>Aktarım ve saklama</h2>
+      <p>İsteğe bağlı bulut verileri HTTPS üzerinden aktarılır ve Supabase altyapısının Frankfurt, Almanya bölgesinde saklanır. Google ile giriş seçilirse kimlik doğrulama Google üzerinden gerçekleşir.</p>
+
+      <h2>Saklama ve silme</h2>
+      <p>Bulut verileri hesap açık kaldığı sürece saklanır. Günlük hesap indirme sayacı yeni UTC günündeki ilk indirmede sıfırlanır ve hesap silindiğinde kaldırılır. Kullanıcı hesap kimliği alanı taşımayan, sunucuya özel gizli değerle oluşturulmuş IP özeti kota satırları iki günden eski olduklarında temizliğe alınır ve sonraki indirme işlemlerinde küçük gruplar halinde otomatik silinir. Altyapı sağlayıcısının standart güvenlik kayıtları kendi güvenlik ve saklama kurallarına tabidir.</p>
+      <p>Uygulama içinden <strong>Menü → Yedekleme ve veri → Bulut yedek → Hesabı kalıcı olarak sil</strong> yoluyla hesap, e-posta, bulut yedekleri, paylaşım verileri ve hesaba bağlı indirme sayacı kalıcı olarak silinebilir. Ayrıntılı adımlar için <a href="hesap-silme.html">hesap silme sayfasına</a> bakın.</p>
+
+      <h2>Çocukların gizliliği</h2>
+      <p>Uygulama işletme sahipleri için tasarlanmıştır, 13 yaş altı çocuklara yönelik değildir ve bilerek çocuklardan veri toplamaz.</p>
+
+      <h2>Haklar ve iletişim</h2>
+      <p><strong>Veri sorumlusu:</strong> Abdullah Yiğit (bireysel geliştirici).</p>
+      <p>KVKK m.11 kapsamında kişisel verinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, düzeltme, silme ve aktarıldığı üçüncü kişileri bilme haklarına sahipsiniz.</p>
+      <p>Silme hakkınızı uygulama içinden <strong>Menü → Yedekleme ve veri → Bulut yedek → Hesabı kalıcı olarak sil</strong> adımıyla anında kullanabilirsiniz. Erişim, düzeltme ve uygulamaya erişemediğiniz durumdaki silme başvuruları için: <a href="mailto:cirodestek@gmail.com">cirodestek@gmail.com</a>. Başvurular KVKK'nın öngördüğü sürede (en geç 30 gün) yanıtlanır.</p>
+    </main>
+  </body>
+</html>
