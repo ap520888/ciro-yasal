@@ -5,5 +5,6 @@ herkese açık yasal sayfaları (GitHub Pages ile yayımlanır):
 
 - Gizlilik Politikası: https://ap520888.github.io/ciro-yasal/gizlilik.html
 - Hesap ve Veri Silme: https://ap520888.github.io/ciro-yasal/hesap-silme.html
+- Kullanım Koşulları: https://ap520888.github.io/ciro-yasal/kullanim-kosullari.html
 
 Kaynak metinler ana repodaki `public/` klasöründe tutulur; değişiklikler oradan buraya kopyalanır.
