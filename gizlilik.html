@@ -23,9 +23,9 @@
   <body>
     <main>
       <h1>Ciro (Kolay Para Yönetimi) Gizlilik Politikası</h1>
-      <small>Son güncelleme: 22 Ağustos 2026</small>
+      <small>Son güncelleme: 24 Eylül 2026</small>
 
-      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
+      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Ortak daveti kullanırsanız defterinizin şifreli kopyası davet ettiğiniz kişiyle paylaşılır ve onun cihazında da saklanır. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
 
       <h2>Toplanan veriler ve kullanım amaçları</h2>
       <p><strong>Hesapsız kullanımda</strong> uygulamadaki finans kayıtları, ayarlar ve fiş fotoğrafları yalnızca cihazınızda saklanır. Fiş metni tanıma işlemi cihaz üzerinde yapılır.</p>
@@ -33,12 +33,17 @@
       <ul>
         <li>E-posta adresi: hesap oluşturma ve giriş doğrulama.</li>
         <li>Cihazda AES-256-GCM ile şifrelenmiş defter yedeği: yedekleme ve yeni cihaza geri yükleme.</li>
-        <li>Defter paylaşımı kullanılırsa şifreli kayıt zarfları: personel kayıtlarının işletme sahibine iletilmesi.</li>
+        <li>Personel daveti kullanılırsa şifreli kayıt zarfları: personelin gönderdiği kayıtların işletme sahibine iletilmesi. Personel defteri göremez; yalnız kayıt gönderir.</li>
+        <li>Ortak daveti kullanılırsa paylaşılan defterin şifreli kopyası: davet ettiğiniz ortak, defterin tamamını (kayıtlar, cariler, hesap bakiyeleri, raporlar) kendi cihazında görür ve doğrudan yazar. Ayrıntılar aşağıdaki "Ortak defter paylaşımı" bölümünde.</li>
         <li>Yedek indirme kötüye kullanımını sınırlamak için günlük hesap indirme sayacı ve bayt toplamı.</li>
         <li>Yedek indirme IP kotası: ham IP uygulama veritabanına yazılmadan, yalnız sunucuda bulunan gizli bir değerle tek yönlü SHA-256 özeti oluşturulur; özet, günlük indirme sayacı ve bayt toplamıyla işlenir.</li>
         <li>Altyapı sağlayıcısının güvenlik ve erişim kayıtları: IP adresi ve zaman damgası gibi standart bağlantı bilgileri.</li>
       </ul>
       <p>Bulut yedeği sunucuda şifreli saklanır. Şifreleme anahtarı hesabınıza bağlı altyapıda tutulduğu için bu özellik “sunucu dâhil hiç kimse erişemez” anlamında uçtan uca şifreleme iddiası taşımaz.</p>
+
+      <h2>Ortak defter paylaşımı</h2>
+      <p>İşletme sahibi bir ortağı davet ettiğinde o defter için ayrı bir paylaşım anahtarı üretilir; işletme sahibinin hesap anahtarı ve diğer defterleri hiçbir zaman paylaşılmaz. Defterin şifreli kopyası sunucuda paylaşım kaydı olarak tutulur; ortak bu kopyayı kendi cihazına indirir, kendi cihazında saklar, kayıt ekler ve düzenler. İki cihazın değişiklikleri sunucuda birleştirilir; aynı kaydı iki taraf da değiştirmişse hiçbir kayıt sessizce silinmez, karar kullanıcıya sorulur.</p>
+      <p>Ortağın gördüğü veriler: defterdeki bütün kayıtlar, cariler ve hareketleri, hesaplar ve bakiyeleri, stok, raporlar. Ortak, işletme sahibinin e-posta adresini ve diğer defterlerini görmez. Paylaşım, işletme sahibi tarafından uygulama içinden istendiği an iptal edilebilir; iptalden sonra ortağın sunucudaki kopyaya erişimi kapanır ve yeni değişiklikler ona ulaşmaz. Ortağın cihazına o ana kadar inmiş kopya, ortak o defteri cihazından kaldırana kadar cihazında kalabilir.</p>
 
       <h2>Aktarım ve saklama</h2>
       <p>İsteğe bağlı bulut verileri HTTPS üzerinden aktarılır ve Supabase altyapısının Frankfurt, Almanya bölgesinde saklanır. Google ile giriş seçilirse kimlik doğrulama Google üzerinden gerçekleşir.</p>
