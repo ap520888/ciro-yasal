@@ -23,9 +23,9 @@
   <body>
     <main>
       <h1>Ciro (Kolay Para Yönetimi) Gizlilik Politikası</h1>
-      <small>Son güncelleme: 24 Eylül 2026</small>
+      <small>Son güncelleme: 26 Eylül 2026</small>
 
-      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Ortak daveti kullanırsanız defterinizin şifreli kopyası davet ettiğiniz kişiyle paylaşılır ve onun cihazında da saklanır. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
+      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Ortak daveti kullanırsanız defterinizin şifreli kopyası davet ettiğiniz kişiyle paylaşılır ve onun cihazında da saklanır. Ücretli abonelik satın alındığında mağazanın verdiği işlem kimliği hesabınızla ilişkilendirilir. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
 
       <h2>Toplanan veriler ve kullanım amaçları</h2>
       <p><strong>Hesapsız kullanımda</strong> uygulamadaki finans kayıtları, ayarlar ve fiş fotoğrafları yalnızca cihazınızda saklanır. Fiş metni tanıma işlemi cihaz üzerinde yapılır.</p>
@@ -35,6 +35,7 @@
         <li>Cihazda AES-256-GCM ile şifrelenmiş defter yedeği: yedekleme ve yeni cihaza geri yükleme.</li>
         <li>Personel daveti kullanılırsa şifreli kayıt zarfları: personelin gönderdiği kayıtların işletme sahibine iletilmesi. Personel defteri göremez; yalnız kayıt gönderir.</li>
         <li>Ortak daveti kullanılırsa paylaşılan defterin şifreli kopyası: davet ettiğiniz ortak, defterin tamamını (kayıtlar, cariler, hesap bakiyeleri, raporlar) kendi cihazında görür ve doğrudan yazar. Ayrıntılar aşağıdaki "Ortak defter paylaşımı" bölümünde.</li>
+        <li>Ücretli abonelik (App Store / Google Play) satın alınırsa mağazanın verdiği işlem kimliği, paket adı, bitiş tarihi, mağaza adı ve mağaza ortamı (üretim/sandbox): aboneliğin hesabınıza ait olduğunu doğrulamak, bulut ve davet haklarını açmak ve aynı aboneliğin başka bir hesaba aktarılmasını önlemek için. Satın alma sırasında mağazaya hesabınızın kimliği de iletilir: App Store'a hesap kimliği (appAccountToken), Google Play'e bunun tek yönlü SHA-256 özeti. Ödeme bilgileri (kart vb.) yalnız mağazada kalır; uygulamaya ulaşmaz.</li>
         <li>Yedek indirme kötüye kullanımını sınırlamak için günlük hesap indirme sayacı ve bayt toplamı.</li>
         <li>Yedek indirme IP kotası: ham IP uygulama veritabanına yazılmadan, yalnız sunucuda bulunan gizli bir değerle tek yönlü SHA-256 özeti oluşturulur; özet, günlük indirme sayacı ve bayt toplamıyla işlenir.</li>
         <li>Altyapı sağlayıcısının güvenlik ve erişim kayıtları: IP adresi ve zaman damgası gibi standart bağlantı bilgileri.</li>
@@ -46,11 +47,11 @@
       <p>Ortağın gördüğü veriler: defterdeki bütün kayıtlar, cariler ve hareketleri, hesaplar ve bakiyeleri, stok, raporlar. Ortak, işletme sahibinin e-posta adresini ve diğer defterlerini görmez. Paylaşım, işletme sahibi tarafından uygulama içinden istendiği an iptal edilebilir; iptalden sonra ortağın sunucudaki kopyaya erişimi kapanır ve yeni değişiklikler ona ulaşmaz. Ortağın cihazına o ana kadar inmiş kopya, ortak o defteri cihazından kaldırana kadar cihazında kalabilir.</p>
 
       <h2>Aktarım ve saklama</h2>
-      <p>İsteğe bağlı bulut verileri HTTPS üzerinden aktarılır ve Supabase altyapısının Frankfurt, Almanya bölgesinde saklanır. Google ile giriş seçilirse kimlik doğrulama Google üzerinden gerçekleşir.</p>
+      <p>İsteğe bağlı bulut verileri HTTPS üzerinden aktarılır ve Supabase altyapısının Frankfurt, Almanya bölgesinde saklanır. Google ile giriş seçilirse kimlik doğrulama Google üzerinden, Apple ile giriş seçilirse Apple üzerinden gerçekleşir; uygulama bu sağlayıcılardan yalnız kimlik jetonunu ve (varsa) e-posta adresini alır.</p>
 
       <h2>Saklama ve silme</h2>
       <p>Bulut verileri hesap açık kaldığı sürece saklanır. Günlük hesap indirme sayacı yeni UTC günündeki ilk indirmede sıfırlanır ve hesap silindiğinde kaldırılır. Kullanıcı hesap kimliği alanı taşımayan, sunucuya özel gizli değerle oluşturulmuş IP özeti kota satırları iki günden eski olduklarında temizliğe alınır ve sonraki indirme işlemlerinde küçük gruplar halinde otomatik silinir. Altyapı sağlayıcısının standart güvenlik kayıtları kendi güvenlik ve saklama kurallarına tabidir.</p>
-      <p>Uygulama içinden <strong>Menü → Yedekleme ve veri → Bulut yedek → Hesabı kalıcı olarak sil</strong> yoluyla hesap, e-posta, bulut yedekleri, paylaşım verileri ve hesaba bağlı indirme sayacı kalıcı olarak silinebilir. Ayrıntılı adımlar için <a href="hesap-silme.html">hesap silme sayfasına</a> bakın.</p>
+      <p>Uygulama içinden <strong>Menü → Yedekleme ve veri → Bulut yedek → Hesabı kalıcı olarak sil</strong> yoluyla hesap, e-posta, bulut yedekleri, paylaşım verileri, hesaba bağlı abonelik kayıtları ve indirme sayacı kalıcı olarak silinebilir. Mağaza aboneliğinin kendisi hesapla birlikte iptal olmaz; onu mağaza hesabınızdan ayrıca iptal edin. Apple ile giriş kullandıysanız Apple Hesabı → Oturum Açma ve Güvenlik → Apple ile Giriş Yap altından Ciro bağlantısını da kaldırın; bu bağ hesap silinirken otomatik kaldırılmaz. Ayrıntılı adımlar için <a href="hesap-silme.html">hesap silme sayfasına</a> bakın.</p>
 
       <h2>Çocukların gizliliği</h2>
       <p>Uygulama işletme sahipleri için tasarlanmıştır, 13 yaş altı çocuklara yönelik değildir ve bilerek çocuklardan veri toplamaz.</p>
