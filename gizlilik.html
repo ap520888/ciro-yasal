@@ -23,17 +23,19 @@
   <body>
     <main>
       <h1>Ciro (Kolay Para Yönetimi) Gizlilik Politikası</h1>
-      <small>Son güncelleme: 26 Eylül 2026</small>
+      <small>Son güncelleme: 4 Ekim 2026</small>
 
-      <p class="ozet"><strong>Kısa özet:</strong> Uygulama hesap bağlanmadan çevrimdışı çalışır. Bu kullanımda defter kayıtları ve fiş fotoğrafları cihazdan çıkmaz. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Ortak daveti kullanırsanız defterinizin şifreli kopyası davet ettiğiniz kişiyle paylaşılır ve onun cihazında da saklanır. Ücretli abonelik satın alındığında mağazanın verdiği işlem kimliği hesabınızla ilişkilendirilir. Reklam ve analitik izleme SDK'sı kullanılmaz; veriler satılmaz.</p>
+      <p class="ozet"><strong>Kısa özet:</strong> Temel defter işlemleri hesap bağlanmadan çevrimdışı çalışır. Defter kayıtları ve fiş fotoğrafları bu kullanımda cihazdan çıkmaz. Android fiş taramasında kullanılan Google ML Kit, teknik teşhis ve kullanım verileri işleyebilir. İsteğe bağlı bulut hesabı bağlandığında e-posta adresi ile cihazda şifrelenmiş defter yedeği işlenir. Ortak daveti kullanırsanız defterinizin şifreli kopyası davet ettiğiniz kişiyle paylaşılır ve onun cihazında da saklanır. Ücretli abonelik satın alındığında mağazanın verdiği işlem kimliği hesabınızla ilişkilendirilir. Reklam SDK'sı kullanılmaz; veriler satılmaz.</p>
 
       <h2>Toplanan veriler ve kullanım amaçları</h2>
       <p><strong>Hesapsız kullanımda</strong> uygulamadaki finans kayıtları, ayarlar ve fiş fotoğrafları yalnızca cihazınızda saklanır. Fiş metni tanıma işlemi cihaz üzerinde yapılır.</p>
+      <p><strong>Android fiş taraması:</strong> Google ML Kit; cihaz modeli ve işletim sistemi, uygulama sürümü, kurulum başına tanımlayıcı, performans ölçümleri, API yapılandırması, olay türleri ve hata kodları gibi teknik bilgileri teşhis ve kullanım analizi için HTTPS üzerinden Google'a iletebilir. Fiş görüntüsü ve tanınan metin cihaz üzerinde işlenir. Bu teknik veri işleme, bulut hesabı bağlanmasına bağlı değildir. Ayrıntılar için <a href="https://developers.google.com/ml-kit/android-data-disclosure">Google ML Kit veri beyanı</a> ve <a href="https://policies.google.com/privacy">Google gizlilik politikası</a> kullanılabilir. Bu Android açıklaması iOS'taki cihaz üzerinde fiş tanıma işlemini değiştirmez.</p>
       <p><strong>İsteğe bağlı hesap bağlandığında</strong> aşağıdaki veriler işlenebilir:</p>
       <ul>
         <li>E-posta adresi: hesap oluşturma ve giriş doğrulama.</li>
+        <li>Hesap kimliği ve davet etiketi (ad veya takma ad): erişim yetkilerini yönetmek, davet edilen kişiyi tanımak ve hareketlerde kaydı gireni göstermek.</li>
         <li>Cihazda AES-256-GCM ile şifrelenmiş defter yedeği: yedekleme ve yeni cihaza geri yükleme.</li>
-        <li>Personel daveti kullanılırsa şifreli kayıt zarfları: personelin gönderdiği kayıtların işletme sahibine iletilmesi. Personel defteri göremez; yalnız kayıt gönderir.</li>
+        <li>Personel daveti kullanılırsa şifreli kayıt zarfları ve yetkili görünüm: personelin gönderdiği kayıtların işletme sahibine iletilmesi ve seçilen yetkilere göre kayıt durumu, gün özeti veya cari listesinin personele gösterilmesi. Güncel Android sürümünde personel, patronun açık hesaplarının adını ve türünü seçebilir; toplam kasa bakiyesi, hesap limitleri ve banka bilgileri bu listede paylaşılmaz. Uygun kayıtlar güncel Android patron uygulaması açıkken otomatik işlenebilir; hareketlerde kaydı girenin adı ve rolü görünür. Eski iOS sürümü mevcut onay akışını sürdürür.</li>
         <li>Ortak daveti kullanılırsa paylaşılan defterin şifreli kopyası: davet ettiğiniz ortak, defterin tamamını (kayıtlar, cariler, hesap bakiyeleri, raporlar) kendi cihazında görür ve doğrudan yazar. Ayrıntılar aşağıdaki "Ortak defter paylaşımı" bölümünde.</li>
         <li>Ücretli abonelik (App Store / Google Play) satın alınırsa mağazanın verdiği işlem kimliği, paket adı, bitiş tarihi, mağaza adı ve mağaza ortamı (üretim/sandbox): aboneliğin hesabınıza ait olduğunu doğrulamak, bulut ve davet haklarını açmak ve aynı aboneliğin başka bir hesaba aktarılmasını önlemek için. Satın alma sırasında mağazaya hesabınızın kimliği de iletilir: App Store'a hesap kimliği (appAccountToken), Google Play'e bunun tek yönlü SHA-256 özeti. Ödeme bilgileri (kart vb.) yalnız mağazada kalır; uygulamaya ulaşmaz.</li>
         <li>Yedek indirme kötüye kullanımını sınırlamak için günlük hesap indirme sayacı ve bayt toplamı.</li>
