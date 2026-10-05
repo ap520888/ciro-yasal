@@ -63,6 +63,14 @@ test('davet içindeki işaretler korunur; son işaretleri kesik zarfı tamamlama
   assert.equal(sayfa(zarf + 'x', '.)').elemanlar.get('ac').hidden, true)
 })
 
+test('tarayıcı yüzde kaçışıyla dış işaretleri taşıdığında da ortak zarfı korunur', () => {
+  const disIsaret = new URL('https://ornek.test/#.”').hash.slice(1)
+  const { elemanlar } = sayfa(zarf, disIsaret)
+  assert.equal(elemanlar.get('ac').hidden, false)
+  const intent = elemanlar.get('ac').href
+  assert.equal(decodeURIComponent(intent.slice(intent.indexOf('#') + 1, intent.indexOf('#Intent'))), zarf)
+})
+
 test('eski sürüm mesajı ve yalnız ortak daveti çalışmaya devam eder', () => {
   assert.equal(sayfa(metin).elemanlar.get('ac').hidden, false)
   assert.equal(sayfa(ortak).elemanlar.get('ac').hidden, false)

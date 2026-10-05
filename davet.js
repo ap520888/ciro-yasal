@@ -5,17 +5,19 @@ const davetiGoster = () => {
   document.getElementById('baslik').textContent = 'Deftere katıl'
   document.getElementById('metin').value = ''
   document.getElementById('mesaj').textContent = ''
+  const disIsaretler = /[.,!?;:…)\]}>'"”’»]+$/u
   let metin = ''
   try {
     if (location.hash.length <= 8193) {
       // Sohbette URL sonuna eklenen işaretler kaçırılmış davet içeriğine ait değildir.
-      const fragment = location.hash.slice(1).replace(/[.,!?;:…)\]}>'"”’»]+$/u, '')
+      const fragment = location.hash.slice(1).replace(disIsaretler, '')
       metin = decodeURIComponent(fragment)
     }
   } catch { /* bozuk bağlantı */ }
-  const hamDavet = metin
   const zarfOneki = 'CIRO-DAVET-2\n'
   const zarfSonu = '\nCIRO-DAVET-SON'
+  if (metin.startsWith(zarfOneki)) metin = metin.replace(disIsaretler, '')
+  const hamDavet = metin
   if (metin.startsWith(zarfOneki)) {
     if (!metin.endsWith(zarfSonu)) {
       document.getElementById('bilgi').textContent = 'Davet bağlantısı eksik veya bozuk. Patronundan yeni bir davet iste.'
