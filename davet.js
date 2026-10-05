@@ -6,7 +6,13 @@ const davetiGoster = () => {
   document.getElementById('metin').value = ''
   document.getElementById('mesaj').textContent = ''
   let metin = ''
-  try { if (location.hash.length <= 8193) metin = decodeURIComponent(location.hash.slice(1)) } catch { /* bozuk bağlantı */ }
+  try {
+    if (location.hash.length <= 8193) {
+      // Sohbette URL sonuna eklenen işaretler kaçırılmış davet içeriğine ait değildir.
+      const fragment = location.hash.slice(1).replace(/[.,!?;:…)\]}>'"”’»]+$/u, '')
+      metin = decodeURIComponent(fragment)
+    }
+  } catch { /* bozuk bağlantı */ }
   const hamDavet = metin
   const zarfOneki = 'CIRO-DAVET-2\n'
   const zarfSonu = '\nCIRO-DAVET-SON'

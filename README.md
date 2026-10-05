@@ -8,3 +8,7 @@ herkese açık yasal sayfaları (GitHub Pages ile yayımlanır):
 - Kullanım Koşulları: https://ap520888.github.io/ciro-yasal/kullanim-kosullari.html
 
 Kaynak metinler ana repodaki `public/` klasöründe tutulur; değişiklikler oradan buraya kopyalanır.
+
+Davet açılış sayfasının tek kaynağı bu depodaki `davet.html` ve `davet.js`
+dosyalarıdır; uygulama paketine kopyalanmaz. Bağlantı regresyonları
+`node --test test/davet.test.mjs` ile çalıştırılır.

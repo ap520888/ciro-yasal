@@ -9,10 +9,10 @@ const ortak = `ESNAF-ORTAK-1.${'b'.repeat(24)}`
 const metin = `Ali'nin (Ciro) defterine ortak daveti\n${kod}\nCiro'yu aç\n${ortak}`
 const zarf = `CIRO-DAVET-2\n${metin}\nCIRO-DAVET-SON`
 
-function sayfa(ham) {
+function sayfa(ham, disIsaret = '') {
   const elemanlar = new Map()
   const kopyalanan = []
-  const hash = '#' + encodeURIComponent(ham)
+  const hash = '#' + encodeURIComponent(ham) + disIsaret
   const location = { hash, href: 'https://ap520888.github.io/ciro-yasal/davet.html' + hash }
   const olaylar = {}
   runInNewContext(script, {
@@ -44,6 +44,23 @@ test('personel kodu geçerli olsa da kesilmiş ortak bağlantısında katıl dü
   const { elemanlar } = sayfa(zarf.slice(0, zarf.indexOf('ESNAF-ORTAK')))
   assert.match(elemanlar.get('bilgi').textContent, /eksik veya bozuk/)
   assert.equal(elemanlar.get('ac').hidden, true)
+})
+
+test('sohbetin bağlantıya eklediği nokta ve parantez geçerli ortak zarfını bozmaz', () => {
+  for (const son of ['.', ')', '.)', '],', '!”']) {
+    const { elemanlar } = sayfa(zarf, son)
+    assert.equal(elemanlar.get('ac').hidden, false)
+    const intent = elemanlar.get('ac').href
+    assert.equal(decodeURIComponent(intent.slice(intent.indexOf('#') + 1, intent.indexOf('#Intent'))), zarf)
+    assert.equal(elemanlar.get('metin').value, metin)
+  }
+})
+
+test('davet içindeki işaretler korunur; son işaretleri kesik zarfı tamamlamaz', () => {
+  const isaretli = `CIRO-DAVET-2\n${metin}\nMesaj sonu.)\nCIRO-DAVET-SON`
+  assert.equal(sayfa(isaretli, '.)').elemanlar.get('metin').value, `${metin}\nMesaj sonu.)`)
+  assert.equal(sayfa(zarf.slice(0, -4), '.)').elemanlar.get('ac').hidden, true)
+  assert.equal(sayfa(zarf + 'x', '.)').elemanlar.get('ac').hidden, true)
 })
 
 test('eski sürüm mesajı ve yalnız ortak daveti çalışmaya devam eder', () => {
