@@ -1,0 +1,12 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; background: #faf8f4; color: #211f1b; }
+@font-face { font-family: 'Ciro Khmer'; font-weight: 400; font-style: normal; font-display: swap; src: url('./fonts/noto-sans-khmer-400.woff2') format('woff2'); }
+@font-face { font-family: 'Ciro Khmer'; font-weight: 700; font-style: normal; font-display: swap; src: url('./fonts/noto-sans-khmer-700.woff2') format('woff2'); }
+html[lang='km'] { font-family: 'Ciro Khmer', sans-serif; line-height: 1.8; }
+body { margin: 0; padding: 24px; }
+main { max-width: 420px; margin: 12vh auto; padding: 24px; border: 1px solid #e8e1d8; border-radius: 20px; background: #fff; }
+h1 { font-size: 24px; }
+p { font-size: 15px; line-height: 1.5; }
+a:not([hidden]) { display: block; padding: 14px; border-radius: 12px; background: #f8bc08; color: #211f1b; text-align: center; text-decoration: none; font-weight: 600; }
+.not { font-size: 13px; color: #6b6458; margin-top: 20px; }
+a.magaza:not([hidden]) { background: transparent; border: 1px solid #c9c0b3; color: inherit; font-weight: 500; }
+@media (prefers-color-scheme: dark) { :root { background: #181818; color: #f7f4ef; } main { background: #232323; border-color: #444; } .not { color: #b8b0a3; } a.magaza:not([hidden]) { border-color: #5a554c; } }
