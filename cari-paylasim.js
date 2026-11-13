@@ -28,13 +28,13 @@
   const WEB_UYGULAMA_YAYINDA = false
   const MAGAZA = {
     ios: 'https://apps.apple.com/app/id6812468853',
-    android: 'https://play.google.com/store/apps/details?id=com.esnaf.nakitdefteri',
+    android: 'https://play.google.com/store/apps/details?id=com.esnaf.ciro',
   }
   let saklananDil
   try { saklananDil = localStorage.getItem('ciro-ui-locale-v1') } catch { /* Storage is optional. */ }
   const tarayiciDili = navigator.language?.toLowerCase()
   let dil = saklananDil === 'fil' || saklananDil === 'km' || saklananDil === 'vi' || saklananDil === 'ur' || saklananDil === 'bn' || saklananDil === 'sw' || saklananDil === 'am' || saklananDil === 'id' || saklananDil === 'fr' || saklananDil === 'ar' || saklananDil === 'tr' || saklananDil === 'en' || saklananDil === 'es' || saklananDil === 'pt-BR' ? saklananDil : tarayiciDili?.startsWith('vi') ? 'vi' : tarayiciDili?.startsWith('km') ? 'km' : tarayiciDili?.startsWith('fil') || tarayiciDili?.startsWith('tl') ? 'fil' : tarayiciDili?.startsWith('ur') ? 'ur' : tarayiciDili?.startsWith('bn') ? 'bn' : tarayiciDili?.startsWith('sw') ? 'sw' : tarayiciDili?.startsWith('am') ? 'am' : tarayiciDili?.startsWith('id') || tarayiciDili?.startsWith('in') ? 'id' : tarayiciDili?.startsWith('fr') ? 'fr' : tarayiciDili?.startsWith('ar') ? 'ar' : tarayiciDili?.startsWith('tr') ? 'tr' : tarayiciDili?.startsWith('pt') ? 'pt-BR' : tarayiciDili?.startsWith('es') ? 'es' : 'en'
-  const gecerli = /^CIRO-CARI-1\.[a-f0-9]{64}$/.test(token)
+  const gecerli = /^CIRO-CARI-[12]\.[a-f0-9]{64}$/.test(token)
   const goster = () => {
     const m = metinler[dil]
     document.documentElement.lang = dil === 'es' ? 'es-419' : dil
