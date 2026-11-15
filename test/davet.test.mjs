@@ -9,7 +9,7 @@ const ortak = `ESNAF-ORTAK-1.${'b'.repeat(24)}`
 const metin = `Ali'nin (Ciro) defterine ortak daveti\n${kod}\nCiro'yu aç\n${ortak}`
 const zarf = `CIRO-DAVET-2\n${metin}\nCIRO-DAVET-SON`
 
-function sayfa(ham, disIsaret = '') {
+function sayfa(ham, disIsaret = '', userAgent = 'Mozilla/5.0 (Linux; Android 14)') {
   const elemanlar = new Map()
   const kopyalanan = []
   const hash = '#' + encodeURIComponent(ham) + disIsaret
@@ -22,7 +22,7 @@ function sayfa(ham, disIsaret = '') {
       if (!elemanlar.has(id)) elemanlar.set(id, { hidden: true, removeAttribute(ad) { delete this[ad] } })
       return elemanlar.get(id)
     } },
-    navigator: { clipboard: { writeText: async text => kopyalanan.push(text) } },
+    navigator: { userAgent, clipboard: { writeText: async text => kopyalanan.push(text) } },
     atob: text => Buffer.from(text, 'base64').toString('binary'),
   })
   return { elemanlar, kopyalanan, location, olaylar }
@@ -90,4 +90,17 @@ test('açık sayfada bağlantı eksik davete değişirse eski katılma ve mesaj 
   assert.equal(elemanlar.get('ac').href, undefined)
   assert.equal(elemanlar.get('metin').value, '')
   assert.match(elemanlar.get('bilgi').textContent, /eksik veya bozuk/)
+})
+
+test('iPhone Safari intent yerine ciro:// açar ve App Store bağlantısı gösterir', () => {
+  const { elemanlar } = sayfa(zarf, '', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)')
+  assert.equal(decodeURIComponent(elemanlar.get('ac').href.replace('ciro://katil#', '')), zarf)
+  assert.match(elemanlar.get('ac').href, /^ciro:\/\/katil#/)
+  assert.match(elemanlar.get('indir').href, /apps\.apple\.com/)
+})
+
+test('Android intenti yeni paket adını kullanır', () => {
+  const { elemanlar } = sayfa(zarf)
+  assert.match(elemanlar.get('ac').href, /package=com\.esnaf\.ciro;/)
+  assert.doesNotMatch(elemanlar.get('ac').href + elemanlar.get('indir').href, /nakitdefteri/)
 })

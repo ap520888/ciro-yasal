@@ -1,4 +1,10 @@
 /* Davet yalnız URL fragmentinde; ağ isteği, çerez ve analiz yok. */
+const PLAY = 'https://play.google.com/store/apps/details?id=com.esnaf.ciro'
+const ua = navigator.userAgent || ''
+const iphone = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
+const indir = document.getElementById('indir')
+indir.href = iphone ? 'https://apps.apple.com/app/id6812468853' : PLAY
+if (iphone) indir.textContent = 'iPhone uygulamasını indir'
 const davetiGoster = () => {
   for (const id of ['ac', 'kopyala', 'eski']) document.getElementById(id).hidden = true
   document.getElementById('ac').removeAttribute('href')
@@ -39,7 +45,8 @@ const davetiGoster = () => {
   const fragment = encodeURIComponent(hamDavet).replace(/[!'()*]/g, karakter => `%${karakter.charCodeAt(0).toString(16).toUpperCase()}`)
   const ac = document.getElementById('ac')
   ac.hidden = false
-  ac.href = `intent://katil#${fragment}#Intent;scheme=ciro;package=com.esnaf.nakitdefteri;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.esnaf.nakitdefteri')};end`
+  // intent:// yalnız Android Chrome'da çalışır; Safari onu "adres geçersiz" diye reddeder.
+  ac.href = iphone ? `ciro://katil#${fragment}` : `intent://katil#${fragment}#Intent;scheme=ciro;package=com.esnaf.ciro;S.browser_fallback_url=${encodeURIComponent(PLAY)};end`
   const kopyala = document.getElementById('kopyala')
   kopyala.hidden = false
   const kopyalaMetin = async (deger) => {
