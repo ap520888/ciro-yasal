@@ -104,3 +104,16 @@ test('Android intenti yeni paket adını kullanır', () => {
   assert.match(elemanlar.get('ac').href, /package=com\.esnaf\.ciro;/)
   assert.doesNotMatch(elemanlar.get('ac').href + elemanlar.get('indir').href, /nakitdefteri/)
 })
+
+test('kısa bağlantı kodları açar; kesik kısa bağlantı hiçbir rolü açmaz', () => {
+  const kisa = `~${kod}~${ortak}~SON`
+  const { elemanlar } = sayfa(kisa, '.')
+  assert.equal(elemanlar.get('ac').hidden, false)
+  assert.equal(elemanlar.get('metin').value, `${kod}
+${ortak}`)
+  const intent = elemanlar.get('ac').href
+  assert.equal(decodeURIComponent(intent.slice(intent.indexOf('#') + 1, intent.indexOf('#Intent'))), kisa)
+  const kesik = sayfa(`~${kod}~`)
+  assert.equal(kesik.elemanlar.get('ac').hidden, true)
+  assert.match(kesik.elemanlar.get('bilgi').textContent, /eksik veya bozuk/)
+})

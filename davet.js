@@ -22,8 +22,16 @@ const davetiGoster = () => {
   } catch { /* bozuk bağlantı */ }
   const zarfOneki = 'CIRO-DAVET-2\n'
   const zarfSonu = '\nCIRO-DAVET-SON'
-  if (metin.startsWith(zarfOneki)) metin = metin.replace(disIsaretler, '')
+  // Kısa biçim (#~KOD~KOD~SON): yalnız kodlar; kesik olan hiçbir rolü açmaz.
+  if (metin.startsWith(zarfOneki) || metin.startsWith('~')) metin = metin.replace(disIsaretler, '')
   const hamDavet = metin
+  if (metin.startsWith('~')) {
+    if (!metin.endsWith('~SON')) {
+      document.getElementById('bilgi').textContent = 'Davet bağlantısı eksik veya bozuk. Patronundan yeni bir davet iste.'
+      return
+    }
+    metin = metin.slice(1, -4).split('~').join('\n')
+  }
   if (metin.startsWith(zarfOneki)) {
     if (!metin.endsWith(zarfSonu)) {
       document.getElementById('bilgi').textContent = 'Davet bağlantısı eksik veya bozuk. Patronundan yeni bir davet iste.'
