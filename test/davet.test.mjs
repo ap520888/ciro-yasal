@@ -9,7 +9,8 @@ const ortak = `ESNAF-ORTAK-1.${'b'.repeat(24)}`
 const metin = `Ali'nin (Ciro) defterine ortak daveti\n${kod}\nCiro'yu aç\n${ortak}`
 const zarf = `CIRO-DAVET-2\n${metin}\nCIRO-DAVET-SON`
 
-function sayfa(ham, disIsaret = '', userAgent = 'Mozilla/5.0 (Linux; Android 14)') {
+function sayfa(ham, disIsaret = '', userAgent = 'Mozilla/5.0 (Linux; Android 14)', language = 'tr-TR') {
+  const documentElement = {}
   const elemanlar = new Map()
   const kopyalanan = []
   const hash = '#' + encodeURIComponent(ham) + disIsaret
@@ -18,14 +19,14 @@ function sayfa(ham, disIsaret = '', userAgent = 'Mozilla/5.0 (Linux; Android 14)
   runInNewContext(script, {
     location,
     window: { addEventListener: (tur, is) => { olaylar[tur] = is } },
-    document: { getElementById(id) {
+    document: { documentElement, title: '', getElementById(id) {
       if (!elemanlar.has(id)) elemanlar.set(id, { hidden: true, removeAttribute(ad) { delete this[ad] } })
       return elemanlar.get(id)
     } },
-    navigator: { userAgent, clipboard: { writeText: async text => kopyalanan.push(text) } },
+    navigator: { userAgent, language, clipboard: { writeText: async text => kopyalanan.push(text) } },
     atob: text => Buffer.from(text, 'base64').toString('binary'),
   })
-  return { elemanlar, kopyalanan, location, olaylar }
+  return { elemanlar, kopyalanan, location, olaylar, documentElement }
 }
 
 test('tam ortak bağlantısı rolü ve bitiş işaretini Android intentinde korur', async () => {
@@ -116,4 +117,34 @@ ${ortak}`)
   const kesik = sayfa(`~${kod}~`)
   assert.equal(kesik.elemanlar.get('ac').hidden, true)
   assert.match(kesik.elemanlar.get('bilgi').textContent, /eksik veya bozuk/)
+})
+
+test('sayfa telefonun dilinde açılır; bilinmeyen dil İngilizceye düşer', () => {
+  const kisa = `~${kod}~${ortak}~SON`
+  const en = sayfa(kisa, '', undefined, 'en-GB')
+  assert.equal(en.elemanlar.get('ac').textContent, 'Join in Ciro')
+  assert.match(en.elemanlar.get('bilgi').textContent, /Join in Ciro/)
+  const ar = sayfa(kisa, '', undefined, 'ar-SA')
+  assert.equal(ar.documentElement.dir, 'rtl')
+  assert.equal(ar.elemanlar.get('kopyala').textContent, 'انسخ رمز الدعوة')
+  assert.equal(sayfa(kisa, '', undefined, 'pt-PT').documentElement.lang, 'pt-BR')
+  assert.equal(sayfa(kisa, '', undefined, 'de-DE').elemanlar.get('ac').textContent, 'Join in Ciro')
+  assert.match(sayfa('bozuk', '', undefined, 'es-MX').elemanlar.get('bilgi').textContent, /incompleto/)
+})
+
+test('her dil aynı anahtarları taşır', () => {
+  const metinler = runInNewContext(script.slice(0, script.indexOf('const PLAY')) + ';METINLER')
+  const anahtarlar = Object.keys(metinler.tr).sort().join()
+  assert.equal(Object.keys(metinler).length, 14)
+  for (const [dil, m] of Object.entries(metinler)) {
+    assert.equal(Object.keys(m).sort().join(), anahtarlar, dil)
+    assert.match(m.adli, /\{ad\}/, dil)
+  }
+})
+
+test('kısa bağlantıdaki işletme adı başlıkta görünür', () => {
+  const { elemanlar } = sayfa(`~${kod}~${ortak}~SimCo Ltd~SON`, '', undefined, 'en-US')
+  assert.equal(elemanlar.get('baslik').textContent, 'Join the SimCo Ltd ledger')
+  assert.equal(elemanlar.get('ac').hidden, false)
+  assert.match(elemanlar.get('metin').value, /ESNAF-ORTAK-1\./)
 })
