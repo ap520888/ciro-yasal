@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Account and Data Deletion — Ciro</title>
+  <link rel="stylesheet" href="../yasal-en.css" />
+</head>
+<body>
+<main>
+  <h1>Ciro (Simple Money Management) Account and Data Deletion</h1>
+  <small>Last updated: 10 November 2026</small>
+  <h2>Permanent deletion in the app</h2>
+  <ol>
+    <li>Open Ciro.</li>
+    <li>Tap <strong>Menu</strong> and open <strong>Backup and data</strong>.</li>
+    <li>Open the <strong>Cloud backup</strong> section.</li>
+    <li>Tap <strong>Permanently delete account</strong> and complete the confirmation.</li>
+  </ol>
+  <p class="uyari"><strong>This cannot be undone.</strong> Your authentication account, email address, encrypted cloud backups, account-linked sharing data, account-linked subscription records (store transaction identifier, plan and expiry date) and account download counter are deleted. The server does not delete the account until it verifies that its storage has been cleared. If the connection fails, you can retry the same operation.</p>
+
+  <h2>Subscriptions and shared ledgers</h2>
+  <p>Deleting your account <strong>does not cancel</strong> a subscription started through the App Store or Google Play. Cancel it separately in the Subscriptions section of your store account. Account deletion ends your access to ledgers shared with you and ends sharing you created as a business owner.</p>
+
+  <h2>Shared data</h2>
+  <ul>
+    <li>Shared ledgers you own are deleted together with all their records on the server; your partnerships and staff invitations are removed too. Partners and staff lose access; copies already downloaded to their own devices may remain there.</li>
+    <li>If you are a partner or staff member in someone else's ledger, your membership is cancelled. Records you entered as a partner stay in that ledger; the server's “last changed by” field (your account ID) on those records is cleared, while a name and role shown inside a record may remain as long as the record stays in the ledger.</li>
+    <li>Records you sent as staff that the business owner has not yet processed are not deleted; they stay in the business owner's approval box as the business's records. Your account ID on the server is deleted at the latest when the business owner processes the record, while the name shown inside the record may remain as long as the record remains. Those already approved and written to the ledger stay in that ledger. As a business owner, your approval box is deleted entirely. On decisions you made in someone else's approval box, the decision-maker's account ID is cleared.</li>
+    <li>Contact account shares you created are deleted from the server together with their transactions and items awaiting approval; the other party's access closes. In a contact account share you received, your access closes; the record and transaction history of the business that opened the share stay with that business, and your name and email address on the server are deleted. Information already downloaded to devices may remain there.</li>
+    <li>Your notification device records (tokens), notification preferences and notifications waiting to be sent to you are deleted.</li>
+  </ul>
+
+  <h2>Sign in with Apple link</h2>
+  <p>If you used Sign in with Apple, deleting your account does not automatically remove the sign-in link between your Apple Account and Ciro on Apple's side. To remove it on iPhone/iPad, go to <strong>Settings → [Your Name] → Sign-In &amp; Security → Sign in with Apple</strong>, select Ciro and tap <strong>Stop Using Sign in with Apple</strong>. You can also do this at <a href="https://account.apple.com" rel="noreferrer">account.apple.com</a>.</p>
+
+  <h2>Short-term security records</h2>
+  <p>The IP quota used to limit backup download abuse does not write raw IP addresses to the app database. A one-way SHA-256 IP hash generated using a server secret is kept separately without a user account identifier field. Rows older than two days become eligible for cleanup and are automatically deleted in small batches during subsequent downloads. The infrastructure provider's standard access/security logs follow its own retention rules.</p>
+
+  <h2>What remains on the device?</h2>
+  <p>Deleting a cloud account does not automatically delete the offline ledger on your device. If you also want to remove local records, download a backup first if needed, then use the device-data deletion option under <strong>Backup and data</strong>. Uninstalling the app also removes its local data from the device.</p>
+
+  <h2>If you cannot access the app</h2>
+  <p>Send your deletion request to <a href="mailto:cirodestek@gmail.com">cirodestek@gmail.com</a> <strong>from the email address registered to your account</strong>, so we can verify that the request comes from the account owner. Once verified, your account and all cloud data are permanently deleted and the result is sent to the same address.</p>
+  <p><a href="/en/gizlilik.html">View privacy policy</a></p>
+</main>
+</body>
+</html>
