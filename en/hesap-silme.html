@@ -10,12 +10,12 @@
 <body>
 <main>
   <h1>Ciro (Simple Money Management) Account and Data Deletion</h1>
-  <small>Last updated: 10 November 2026</small>
+  <small>Last updated: 20 November 2026</small>
   <h2>Permanent deletion in the app</h2>
   <ol>
     <li>Open Ciro.</li>
-    <li>Tap <strong>Menu</strong> and open <strong>Backup and data</strong>.</li>
-    <li>Open the <strong>Cloud backup</strong> section.</li>
+    <li>Tap <strong>Menu</strong> and open <strong>Settings</strong>.</li>
+    <li>Open the <strong>Sign-in and account</strong> section.</li>
     <li>Tap <strong>Permanently delete account</strong> and complete the confirmation.</li>
   </ol>
   <p class="uyari"><strong>This cannot be undone.</strong> Your authentication account, email address, encrypted cloud backups, account-linked sharing data, account-linked subscription records (store transaction identifier, plan and expiry date) and account download counter are deleted. The server does not delete the account until it verifies that its storage has been cleared. If the connection fails, you can retry the same operation.</p>
@@ -39,7 +39,7 @@
   <p>The IP quota used to limit backup download abuse does not write raw IP addresses to the app database. A one-way SHA-256 IP hash generated using a server secret is kept separately without a user account identifier field. Rows older than two days become eligible for cleanup and are automatically deleted in small batches during subsequent downloads. The infrastructure provider's standard access/security logs follow its own retention rules.</p>
 
   <h2>What remains on the device?</h2>
-  <p>Deleting a cloud account does not automatically delete the offline ledger on your device. If you also want to remove local records, download a backup first if needed, then use the device-data deletion option under <strong>Backup and data</strong>. Uninstalling the app also removes its local data from the device.</p>
+  <p>Deleting a cloud account does not automatically delete the offline ledger on your device. If you also want to remove local records, download a backup first if needed, then use the device-data deletion option under <strong>Settings</strong>. Uninstalling the app also removes its local data from the device.</p>
 
   <h2>If you cannot access the app</h2>
   <p>Send your deletion request to <a href="mailto:cirodestek@gmail.com">cirodestek@gmail.com</a> <strong>from the email address registered to your account</strong>, so we can verify that the request comes from the account owner. Once verified, your account and all cloud data are permanently deleted and the result is sent to the same address.</p>
